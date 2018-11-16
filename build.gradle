@@ -1,0 +1,67 @@
+buildscript {
+	ext {
+		springBootVersion = '2.0.3.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+defaultTasks 'bootRun'
+
+war {
+    baseName = 'SpringJukeboxWebService'
+    enabled= true
+}  
+
+bootWar {
+	
+}
+
+bootRun {
+	main = 'com.telnet.jukebox.spring.SpringJukeboxWebServiceApplication'
+}
+
+group = 'com.telnet.jukebox.spring'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+
+dependencies { 
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+	compile('org.springframework.boot:spring-boot-starter-aop')
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile ('org.springframework.boot:spring-boot-starter-web')
+	compile ('org.springframework.boot:spring-boot-starter-websocket')
+	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.7.0'
+	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.7.0'
+	//{
+    //exclude module: 'org.springframework.boot:spring-boot-starter-logging'
+ // }
+ 
+ compile "org.webjars:webjars-locator:*"
+compile "org.webjars:sockjs-client:1.0.2"
+compile "org.webjars:stomp-websocket:2.3.3"
+compile "org.webjars:bootstrap:3.3.7"
+compile "org.webjars:jquery:3.1.0"
+ 
+ // compile ('org.springframework.boot:spring-boot-starter-log4j2')
+	compile('org.springframework.boot:spring-boot-starter-security')
+	
+compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.9.5'
+	
+	compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.7.0'
+	runtime('mysql:mysql-connector-java')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}
